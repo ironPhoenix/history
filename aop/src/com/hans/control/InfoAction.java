@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.hans.bean.Info;
 import com.hans.service.InfoService;
@@ -24,7 +23,7 @@ public class InfoAction extends HttpServlet {
 	 */
 	public InfoAction() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -46,7 +45,45 @@ public class InfoAction extends HttpServlet {
 		String type = request.getParameter("type");
 		if (type.equals("add")) {
 			doAdd(request, response);
+		} else if (type.equals("change")) {
+			doChange(request, response);
+		} else if (type.equals("delete")) {
+			delete(request, response);
+		} else if (type.equals("saveById")) {
+			saveById(request, response);
 		}
+	}
+
+	private void saveById(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("name");
+		String message = request.getParameter("message");
+		Info info = new Info();
+		info.setId(id);
+		info.setName(name);
+		info.setMessage(message);
+		InfoService infoService = new InfoServiceImpl();
+		infoService.saveById(info);
+		doShow(request, response);
+	}
+
+	private void doChange(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		InfoService infoService = new InfoServiceImpl();
+		request.setAttribute("info", infoService.getByid(id));
+		request.getRequestDispatcher("../changeInfo.jsp").forward(request,
+				response);
+	}
+
+	private void delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String id = request.getParameter("id");
+		InfoService infoService = new InfoServiceImpl();
+		infoService.delete(id);
+		doShow(request, response);
 	}
 
 	private void doAdd(HttpServletRequest request, HttpServletResponse response)
@@ -67,9 +104,10 @@ public class InfoAction extends HttpServlet {
 			throws ServletException, IOException {
 		InfoService infoService = new InfoServiceImpl();
 		List<Object> list = infoService.getAll();
-		HttpSession session = request.getSession();
-		session.setAttribute("AllInfoList", list);
-		response.sendRedirect("../allInfo.jsp");
+
+		request.setAttribute("AllInfoList", list);
+		request.getRequestDispatcher("../allInfo.jsp").forward(request,
+				response);
 
 	}
 

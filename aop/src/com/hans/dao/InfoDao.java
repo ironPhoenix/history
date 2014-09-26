@@ -9,4 +9,10 @@ public interface InfoDao {
 	int add(Info info) throws SQLException;
 
 	List<Object> getAll() throws SQLException;
+
+	int delete(String id) throws SQLException;
+
+	List<Object> getByid(int id) throws SQLException;
+
+	int saveById(Info info) throws SQLException;
 }
