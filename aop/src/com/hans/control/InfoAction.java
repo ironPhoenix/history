@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hans.bean.Info;
+import com.hans.mapping.MappingFactory;
 import com.hans.service.InfoService;
 import com.hans.service.impl.InfoServiceImpl;
+import com.hans.util.Pagination;
 
 /**
  * Servlet implementation class InfoAction
@@ -41,7 +43,6 @@ public class InfoAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		String type = request.getParameter("type");
 		if (type.equals("add")) {
 			doAdd(request, response);
@@ -51,6 +52,8 @@ public class InfoAction extends HttpServlet {
 			delete(request, response);
 		} else if (type.equals("saveById")) {
 			saveById(request, response);
+		} else if (type.equals("show")) {
+			doShow(request, response);
 		}
 	}
 
@@ -102,10 +105,30 @@ public class InfoAction extends HttpServlet {
 
 	private void doShow(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		InfoService infoService = new InfoServiceImpl();
-		List<Object> list = infoService.getAll();
 
+		int pageSize = 2;
+		int pageNumber;
+		try {
+			// 获取当前页码
+
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+			System.out.println(pageNumber);
+
+		} catch (Exception e) {
+			// 如果没有获取到当前页码那么将当前页码设置为1
+			pageNumber = 1;
+		}
+		
+		InfoService infoService = new InfoServiceImpl();
+		System.out.println(pageSize+"asddddddddddd");
+
+		Pagination pagination = infoService.getByPage(pageSize, pageNumber);
+		MappingFactory mf = MappingFactory.getInstance();
+		List<Object> list = pagination.getList(mf.getMapping(MappingFactory.INFO_MAPPING));
+		
 		request.setAttribute("AllInfoList", list);
+		request.setAttribute("totalPageInfoList", pagination.getMaxPages());
+		request.setAttribute("pageNumberInfoList", pagination.getPageNumber());
 		request.getRequestDispatcher("../allInfo.jsp").forward(request,
 				response);
 

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.hans.bean.Info;
+import com.hans.util.Pagination;
 
 public interface InfoDao {
 	int add(Info info) throws SQLException;
@@ -15,4 +16,6 @@ public interface InfoDao {
 	List<Object> getByid(int id) throws SQLException;
 
 	int saveById(Info info) throws SQLException;
+
+	Pagination getByPage(int pageSize, int pageNumber) throws SQLException;
 }

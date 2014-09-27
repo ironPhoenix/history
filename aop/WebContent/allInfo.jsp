@@ -16,5 +16,7 @@
 			<td><a href="InfoAction?type=delete&id=${l.id}">删除</a></td>
 		</tr>
 	</c:forEach>
+	<a href="InfoAction?type=show&pageNumber=${pageNumberInfoList-1} " >上一页</a>
+	<a href="InfoAction?type=show&pageNumber=${pageNumberInfoList+1} " >下一页</a>
 </body>
 </html>

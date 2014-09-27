@@ -9,6 +9,7 @@ import com.hans.dao.InfoDao;
 import com.hans.dao.impl.InfoDaoImpl;
 import com.hans.db.DBManager;
 import com.hans.service.InfoService;
+import com.hans.util.Pagination;
 
 public class InfoServiceImpl implements InfoService {
 
@@ -144,6 +145,30 @@ public class InfoServiceImpl implements InfoService {
 			}
 		}
 		return row;
+	}
+
+	@Override
+	public Pagination getByPage(int pageSize, int pageNumber) {
+		DBManager db = DBManager.getInstance();
+		Connection conn = db.getConnection();
+		InfoDaoImpl idi = new InfoDaoImpl();
+		idi.setConnection(conn);
+		Pagination pagination = null;
+
+		
+		InfoDao id = new InfoDaoImpl();
+		try {
+			pagination = id.getByPage(pageSize,pageNumber);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return pagination;
 	}
 
 }

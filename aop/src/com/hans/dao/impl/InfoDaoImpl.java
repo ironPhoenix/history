@@ -6,6 +6,8 @@ import java.util.List;
 import com.hans.bean.Info;
 import com.hans.dao.InfoDao;
 import com.hans.mapping.MappingFactory;
+import com.hans.util.MysqlPagination;
+import com.hans.util.Pagination;
 
 public class InfoDaoImpl extends BaseDao implements InfoDao {
 
@@ -48,6 +50,13 @@ public class InfoDaoImpl extends BaseDao implements InfoDao {
 
 		int row = jdbcTemplate.update(sql, info.getName(), info.getMessage(),info.getId());
 		return row;
+	}
+
+	@Override
+	public Pagination getByPage(int pageSize, int pageNumber) throws SQLException {
+		String sql = "select * from info";
+		Pagination pg = new MysqlPagination(sql, pageSize, pageNumber);
+		return pg;
 	}
 
 }
