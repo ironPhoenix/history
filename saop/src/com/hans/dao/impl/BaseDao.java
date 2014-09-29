@@ -1,24 +1,23 @@
 package com.hans.dao.impl;
 
-import java.sql.Connection;
+import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.stereotype.Component;
 
-import com.hans.db.JdbcTemplate;
-import com.hans.mapping.MappingFactory;
-
+@Component
 public class BaseDao {
-	protected JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-	protected MappingFactory mappingFactory = MappingFactory.getInstance();
-	protected Log logger = LogFactory.getLog("DAOLogger");
+	private HibernateTemplate hibernateTemplate;
 
-	/**
-	 * 设置connectionݿ�l����
-	 * 
-	 * @param connection
-	 */
-	public void setConnection(Connection connection) {
-		jdbcTemplate.setConnection(connection);
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
 	}
+	
+	@Resource
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+
+
+
 }

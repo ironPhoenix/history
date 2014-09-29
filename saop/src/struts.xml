@@ -6,9 +6,7 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="info" extends="struts-default" namespace="/servlet">
-
-		<action name="info_*" class="com.hans.control.InfoAction"
-			method="{1}">
+		<action name="info_*" class="com.hans.control.InfoAction" method="{1}">
 			<result name="success" type="chain">info_show</result>
 			<result name="error" >/allInfo.jsp</result>
 			<result name="change">/changeInfo.jsp</result>

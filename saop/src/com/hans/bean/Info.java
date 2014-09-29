@@ -1,5 +1,9 @@
 package com.hans.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Info {
 	private int id;
 	private String name;
@@ -21,6 +25,7 @@ public class Info {
 		this.message = message;
 	}
 
+	@Id
 	public int getId() {
 		return id;
 	}

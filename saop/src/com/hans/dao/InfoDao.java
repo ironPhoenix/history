@@ -1,21 +1,19 @@
 package com.hans.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.hans.bean.Info;
-import com.hans.util.Pagination;
 
 public interface InfoDao {
-	int add(Info info) throws SQLException;
+	int add(Info info);
 
-	List<Object> getAll() throws SQLException;
+	List<Object> getAll();
 
-	int delete(String id) throws SQLException;
+	int delete(String id);
 
-	List<Object> getByid(int id) throws SQLException;
+	List<Object> getByid(int id);
 
-	int saveById(Info info) throws SQLException;
+	int saveById(Info info);
 
-	Pagination getByPage(int pageSize, int pageNumber) throws SQLException;
+	//Pagination getByPage(int pageSize, int pageNumber);
 }
