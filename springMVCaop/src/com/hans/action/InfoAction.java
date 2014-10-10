@@ -17,13 +17,13 @@ public class InfoAction {
 	}
 	@RequestMapping(params = "method=add")
 	public String add(Info info) {
-		
+		System.out.println("update");
 		return "index";
 	}
 	
 	@RequestMapping(params = "method=updateById")
 	public String updateById(int id) {
-		
+		System.out.println("update");
 		return "index";
 	}
 	
