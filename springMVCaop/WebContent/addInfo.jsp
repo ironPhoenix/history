@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="info.do" method="post">
-	<input type="hidden" name="method" value="reg">
-		留言人：<input type="text" name="name" /> 
-		留言板：<input type="text" name="message" />
-		<input type="submit" />
+	<form action="info/add" method="post">
+		<input type="hidden" name="type" value="add" />
+		 留言人：<input type="text" name="name" /> 
+		 留言板：<input type="text" name="message" />
+		<input type="submit" value="a"/>
 	</form>
 </body>
 </html>
