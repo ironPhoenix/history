@@ -14,18 +14,7 @@ import com.hans.service.InfoService;
 @Controller
 @RequestMapping("/info")
 public class InfoControl {
-	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("a.xml");
-		InfoService infoService = (InfoService) context.getBean("infoService");
-		Info info = new Info();
-		info.setName("a");
-		info.setMessage("a");
-		// infoService.add(info);
-		for (Info l : infoService.getAll()) {
-			System.out.println(l.getName());
-		}
-
-	}
+	
 
 	public InfoService getInfoService() {
 		return infoService;
@@ -40,7 +29,6 @@ public class InfoControl {
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String add(String name, String message) {
 		Info info = new Info();
-		System.out.println(message);
 		info.setName(name);
 		info.setMessage(message);
 		

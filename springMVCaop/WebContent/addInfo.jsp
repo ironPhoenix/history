@@ -8,10 +8,9 @@
 </head>
 <body>
 	<form action="info/add" method="post">
-		<input type="hidden" name="type" value="add" />
 		 留言人：<input type="text" name="name" /> 
 		 留言板：<input type="text" name="message" />
-		<input type="submit" value="a"/>
+		<input type="submit" value="添加"/>
 	</form>
 </body>
 </html>

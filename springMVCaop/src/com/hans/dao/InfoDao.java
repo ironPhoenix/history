@@ -21,7 +21,6 @@ public class InfoDao {
 
 	public int add(Info info) {
 		sessionFactory.getCurrentSession().save(info);
-		System.out.println(info.getId());
 		return 0;
 	}
 
