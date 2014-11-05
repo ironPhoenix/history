@@ -12,12 +12,15 @@
 		<tr>
 			<td>${l.name}</td>
 			<td>${l.message}</td>
+			<td>${l.infoTime}</td>
 			<td><a href="InfoAction?type=change&id=${l.id}">修改</a></td>
 			<td><a href="InfoAction?type=delete&id=${l.id}">删除</a></td>
 		</tr>
 		<br />
 	</c:forEach>
-	<a href="InfoAction?type=show&pageNumber=${pageNumberInfoList-1} " >上一页</a>
-	<a href="InfoAction?type=show&pageNumber=${pageNumberInfoList+1} " >下一页</a>
+	<a href="list?pageNumber=${currentPageNumber-1} ">上一页</a> 当前第
+	${currentPageNumber} 页
+	<a href="list?pageNumber=${currentPageNumber+1} ">下一页</a> 共
+	${maxPageNumber} 页
 </body>
 </html>

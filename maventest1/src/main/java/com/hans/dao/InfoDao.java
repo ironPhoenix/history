@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hans.model.Info;
+import com.hans.util.PaginationUtil;
 
 @Repository
 public class InfoDao {
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public InfoDao(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -35,11 +36,17 @@ public class InfoDao {
 	public List<Info> getAll() {
 		List<Info> list = new ArrayList<>();
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("from Info info")
-				.setFirstResult(1)
+				.createQuery("from Info info").setFirstResult(1)
 				.setMaxResults(3);
 		list = query.list();
 		return list;
+	}
+
+	public PaginationUtil getByPage(int pageSize, int pageNumber) {
+		String hql = "from Info info";
+		return new PaginationUtil(sessionFactory.getCurrentSession(), hql,
+				pageSize, pageNumber);
+
 	}
 
 	public Info getById(int id) {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hans.dao.InfoDao;
 import com.hans.model.Info;
+import com.hans.util.PaginationUtil;
 
 @Service
 public class InfoService {
@@ -26,6 +27,10 @@ public class InfoService {
 
 	public List<Info> getAll() {
 		return infoDao.getAll();
+	}
+
+	public PaginationUtil getByPage(int pageSize, int pageNumber) {
+		return infoDao.getByPage(pageSize, pageNumber);
 	}
 
 	public Info getById(int id) {

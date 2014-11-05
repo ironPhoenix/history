@@ -1,5 +1,7 @@
 package com.hans.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ public class Info {
 	private int id;
 	private String name;
 	private String message;
+	private Date infoTime;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +38,13 @@ public class Info {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Date getInfoTime() {
+		return infoTime;
+	}
+
+	public void setInfoTime(Date infoTime) {
+		this.infoTime = infoTime;
 	}
 }
