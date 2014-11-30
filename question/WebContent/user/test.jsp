@@ -38,6 +38,7 @@
 			<div><input type="checkbox" name="duo${status.index}" value="D" />D. ${l.d}</div>						
 			<hr />
 		</c:forEach>
+		<input type="submit" value="我要交卷" />
 	</form>
 </body>
 </html>

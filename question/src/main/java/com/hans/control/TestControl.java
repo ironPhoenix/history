@@ -61,27 +61,41 @@ public class TestControl {
 	}
 
 	private String getTest(ModelMap map) {
-		//danInt = RandomInt.getRandomIntList(25, 0, 39);
-		danInt = RandomInt.getRandomIntList(2, 0, 2);
+		danInt = RandomInt.getRandomIntList(25, 0, 38);
+		//danInt = RandomInt.getRandomIntList(2, 0, 2);
 		List<Dan> listDan = testService.getDanListByIntList(danInt);
-		//panInt = RandomInt.getRandomIntList(10, 0, 19);
-		panInt = RandomInt.getRandomIntList(2, 0, 2);
+		panInt = RandomInt.getRandomIntList(10, 0, 19);
+		//panInt = RandomInt.getRandomIntList(2, 0, 2);
 		List<Pan> listPan = testService.getPanListByIntList(panInt);
-		//duoInt = RandomInt.getRandomIntList(10, 0, 19);
-		duoInt = RandomInt.getRandomIntList(2, 0, 2);
+		duoInt = RandomInt.getRandomIntList(10, 0, 18);
+		//duoInt = RandomInt.getRandomIntList(2, 0, 2);
 		List<Duo> listDuo = testService.getDuoListByIntList(duoInt);
 		map.put("listDan", listDan);
 		map.put("listPan", listPan);
 		map.put("listDuo", listDuo);
 		return "../user/test";
 	}
-
-	/*
-	 * String getResult(String dan0...,String pan0...,String duo0...) {
-	 * if(checkTime.isBefore(startTime+1hour)) { int score = 0;
-	 * if(dan0.equals(getDanResultById(danInt.get(0))) score = score+2; //写25次
-	 * if(pan0.equals(getPanResultById(panInt.get(0))) score = score+2; //写10次
-	 * if(duo0.equals(getDuoResultById(duoInt.get(0))) score = score+3; //写10次
-	 * updateUser if(score>=70) //胜利界面 else//失败界面 } }
-	 */
+	@RequestMapping(value = "/result", method = RequestMethod.POST)
+	public String getResult(String dan0,String pan0,String duo0,ModelMap map,HttpSession session) {
+		if(LocalTime.now().isAfter(startTime.plusHours(1))) {
+			return "../error/timeout";
+		}
+		int score = 0;
+		if(dan0.equals(testService.getDanResultById(danInt.get(0)))) score = score+2; //写25次
+		if(pan0.equals(testService.getPanResultById(panInt.get(0))))score = score+2; //写10次
+		if(duo0.equals(testService.getDuoResultById(duoInt.get(0)))) score = score+3; //写10次
+		User user = (User)session.getAttribute("user");
+		user.setScore(score);
+		testService.saveUser(user);
+		map.put("score", score);
+		if(score>=70) return "../user/success";
+		return "../user/fail";
+	}
+	  /*String getResult(String dan0...,String pan0...,String duo0...) {
+	  if(checkTime.isBefore(startTime+1hour)) { int score = 0;
+	  if(dan0.equals(getDanResultById(danInt.get(0))) score = score+2; //写25次
+	  if(pan0.equals(getPanResultById(panInt.get(0))) score = score+2; //写10次
+	 if(duo0.equals(getDuoResultById(duoInt.get(0))) score = score+3; //写10次
+	  updateUser if(score>=70) //胜利界面 else//失败界面 } }
+*/	 
 }

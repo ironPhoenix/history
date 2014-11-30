@@ -28,7 +28,7 @@ public class TestDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(pan);
 	}
 
-	public void addDan(Duo duo) {
+	public void addDuo(Duo duo) {
 		sessionFactory.getCurrentSession().saveOrUpdate(duo);
 	}
 

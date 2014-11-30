@@ -74,4 +74,13 @@ public class TestService {
 		Duo d = testDao.getDuoById(id);
 		return d.getAnswer();
 	}
+
+	public void addPan(Pan pan) {
+		testDao.addPan(pan);	
+	}
+
+	public void addDuo(Duo duo) {
+		testDao.addDuo(duo);
+		
+	}
 }
