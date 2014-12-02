@@ -4,10 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="../docs.css">
+<title>很遗憾</title>
 </head>
 <body>
-fail
-${score}
+<div class="require">
+	<div class="center">您在本次测试中得到了<p style="font-size:2em;color:red">${score}分</p><br />
+	很遗憾您的成绩未达到抽奖资格,感谢您对本活动的支持</div>
+</div>
 </body>
 </html>

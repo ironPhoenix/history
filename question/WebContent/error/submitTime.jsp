@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../docs.css">
-<title>答题超时</title>
+<title>Insert title here</title>
 </head>
 <body>
-<div class="require">
-	<div class="center">对不起，您答题时间已超时<p style="font-size:2em;color:red">答题无效</p><br />
-	很遗憾您未达到抽奖资格,感谢您对本活动的支持</div>
-</div>
+只能提交一次答案
 </body>
 </html>

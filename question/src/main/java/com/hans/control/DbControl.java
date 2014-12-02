@@ -18,12 +18,22 @@ import com.hans.service.TestService;
 public class DbControl {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
-		System.out.println(LocalTime.now());
-		//ApplicationContext context = new ClassPathXmlApplicationContext(
-				//"a-servlet.xml");
-		//TestService ts = context.getBean("testService", TestService.class);
-		//addDan(ts);	
-		//addPan(ts);
+/*		for(int i=0;i<25;i++) {
+			System.out.println("if (testService.getDanResultById(danInt.get("+i+")).equals(dan"+i+")) score = score + 2;");
+		}
+		for(int i=0;i<10;i++) {
+			System.out.println("if (testService.getPanResultById(panInt.get("+i+")).equals(pan"+i+")) score = score + 2;");
+		}
+		for(int i=0;i<10;i++) {
+			System.out.println("if (testService.getDuoResultById(duoInt.get("+i+")).equals(duo"+i+")) score = score + 3;");
+		}*/
+		
+		//System.out.println(LocalTime.now());
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"a-servlet.xml");
+		TestService ts = context.getBean("testService", TestService.class);
+		addDan(ts);	
+		addPan(ts);
 		//addDuo(ts);
 	}
 	private static void addDuo(TestService ts) throws Exception {

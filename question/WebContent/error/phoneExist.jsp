@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../docs.css">
+<title>手机号码已被使用</title>
 </head>
 <body>
-该电话号码已经被使用
+<div class="require">
+	<div class="center">对不起，该手机号码已被使用<p style="font-size:2em;color:red">已经被使用</p><br /></div>
+</div>
 </body>
 </html>
