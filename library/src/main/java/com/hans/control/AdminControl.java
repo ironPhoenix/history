@@ -45,7 +45,7 @@ public class AdminControl implements ServletContextAware {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(String username, String password) {
 		if (username.equals(password))
-			return "../admin/main";
+			return "../admin/borrowBook";
 		return "../error/loginError";
 	}
 
@@ -53,13 +53,13 @@ public class AdminControl implements ServletContextAware {
 	public String addBookKind(String indexNumber, String bookName,
 			String author, String publishing, String publishTime,
 			@RequestParam("bookPicture") CommonsMultipartFile file) {
-		String path = this.servletContext.getRealPath("/tmp/"); // 获取本地存储路径
+		String path = this.servletContext.getRealPath("/tmp/");
 		System.out.println(path);
 		String fileName = file.getOriginalFilename();
 		String fileType = fileName.substring(fileName.lastIndexOf("."));
-		File file2 = new File(path, indexNumber + fileType); // 新建一个文件
+		File file2 = new File(path, indexNumber + fileType); 
 		try {
-			file.getFileItem().write(file2); // 将上传的文件写入新建的文件中
+			file.getFileItem().write(file2); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,7 +70,7 @@ public class AdminControl implements ServletContextAware {
 		bk.setPublishing(publishing);
 		bk.setPublishTime(publishTime);
 		testService.addBookKind(bk);
-		return "../admin/main";
+		return "../admin/borrowBook";
 	}
 
 	@RequestMapping(value = "/addb", method = RequestMethod.POST)
@@ -79,9 +79,10 @@ public class AdminControl implements ServletContextAware {
 			Book b = new Book();
 			b.setBookId(Integer.valueOf(bookId));
 			b.setRoom(room);
+			System.out.println(indexNumber);
 			b.setBookKind(testService.getBookKindByIndexNumber(indexNumber));
 			testService.addBook(b);
-			return "../admin/main";
+			return "../admin/borrowBook";
 		} catch (Exception e) {
 			return "../error/addBookError";
 		}
@@ -102,7 +103,7 @@ public class AdminControl implements ServletContextAware {
 				b.setBorrowedDate(new Date());
 				b.setRenewedTimes(0);
 				testService.addBook(b);
-				return "../admin/main";
+				return "../admin/borrowBook";
 			}
 			return "../error/borrowMaxError";
 		} catch (Exception e) {
@@ -128,7 +129,7 @@ public class AdminControl implements ServletContextAware {
 			System.out.println(date);
 			System.out.println(LocalDate.now());
 			if(date.plusDays((renewedTimes+1)*30).isAfter(LocalDate.now()))
-				return "../admin/main";
+				return "../admin/borrowBook";
 			return "../admin/forfeit";
 		} catch (Exception e) {
 			return "../error/returnError";

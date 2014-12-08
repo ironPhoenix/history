@@ -4,15 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../jscss/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../jscss/signin.css" rel="stylesheet">
+<script src="../jscss/assets/js/ie-emulation-modes-warning.js"></script>
+<title>管理员登陆</title>
 </head>
 <body>
-	<h4>管理员登陆</h4>
-	<form action="../admin/login" method="post">
-		用户名:<input type="text" name="username" /> 
-		密码：<input type="text"name="password" /> 
-		<input type="submit" value="添加" />
-	</form>
-	 
+	 <div class="container">
+      <form class="form-signin" action="../admin/login" method="post" role="form">
+        <h2 class="form-signin-heading">管理员登陆</h2>
+        <input type="text" class="form-control" name="username" placeholder="用户名" required autofocus>
+        <input type="password" class="form-control" name="password" placeholder="密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

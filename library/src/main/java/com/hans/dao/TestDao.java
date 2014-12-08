@@ -54,12 +54,11 @@ public class TestDao {
 	}
 
 	public void addBorrower(Borrower borrower) {
-		sessionFactory.getCurrentSession().save(borrower);
+		sessionFactory.getCurrentSession().saveOrUpdate(borrower);
 	}
 
 	public Borrower getBorrowerById(String id) {
-		return (Borrower) sessionFactory.getCurrentSession().get(
-				Borrower.class, id);
+		return (Borrower) sessionFactory.getCurrentSession().get(Borrower.class, id);
 	}
 
 	public Book getBookById(int id) {

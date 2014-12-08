@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -57,7 +58,7 @@ public class BookKind {
 		this.publishTime = publishTime;
 	}
 
-	@OneToMany(mappedBy = "bookKind")
+	@OneToMany(mappedBy = "bookKind",fetch=FetchType.EAGER)
 	public Set<Book> getBooks() {
 		return books;
 	}

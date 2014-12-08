@@ -27,9 +27,11 @@ public class BorrowerControl {
 		this.testService = testService;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login")
 	public String login(String username, String password, HttpSession session) {
-		if (username.equals(password))
+		System.out.println(username);
+		Borrower b = testService.getBorrowerById(username);		
+		if (b.getKeyword().equals(password))
 			return getInfo(username, session);
 		return "../error/loginError";
 	}
@@ -38,17 +40,31 @@ public class BorrowerControl {
 		session.setAttribute("borrower", testService.getBorrowerById(username));
 		return "../borrower/main";
 	}
-	@RequestMapping(value = "/reBorrow", method = RequestMethod.POST)
-	private String reBorrow(int bookId, HttpSession session) {
-		Set<Book> books = ((Borrower) session.getAttribute("borrower"))
-				.getBooks();
-
+	@RequestMapping(value = "/reBorrow")
+	public String reBorrow(int bookId, HttpSession session) {
+		Borrower borrower = (Borrower) session.getAttribute("borrower");
+		
+		Set<Book> books = borrower.getBooks();
+		
 		for (Book b : books) {
 			if (b.getBookId() == bookId) {
+				if(b.getRenewedTimes()>=borrower.getAuthority().getRenewMaxTimes())
+					return "../error/renewError";
 				b.setRenewedTimes(b.getRenewedTimes() + 1);
+				testService.addBook(b);
 				break;
 			}
 		}
+		return "../borrower/main";
+	}
+	@RequestMapping(value = "/repass")
+	public String rePassword(String password,String newpassword, HttpSession session) {
+		
+		Borrower borrower = (Borrower) session.getAttribute("borrower");
+		if(!borrower.getKeyword().equals(password)) 
+			return "../error/repassError";
+		borrower.setKeyword(newpassword);
+		testService.addBorrower(borrower);
 		return "../borrower/main";
 	}
 }

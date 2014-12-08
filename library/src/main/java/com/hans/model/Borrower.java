@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +34,7 @@ public class Borrower {
 		this.keyword = keyword;
 	}
 
-	@OneToMany(mappedBy = "borrower")
+	@OneToMany(mappedBy = "borrower",fetch=FetchType.EAGER)
 	public Set<Book> getBooks() {
 		return books;
 	}
