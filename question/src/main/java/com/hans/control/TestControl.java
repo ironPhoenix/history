@@ -53,6 +53,7 @@ public class TestControl {
 		session.setAttribute("user", user);
 		LocalTime startTime = LocalTime.now();
 		session.setAttribute("startTime", startTime);
+		session.setAttribute("isCommitTest", false);
 		return getTest(map, session);
 	}
 
@@ -87,6 +88,10 @@ public class TestControl {
 			String duo0, String duo1, String duo2, String duo3, String duo4,
 			String duo5, String duo6, String duo7, String duo8, String duo9,
 			ModelMap map, HttpSession session) {
+		if((boolean)session.getAttribute("isCommitTest")) {
+			return "../error/commitBan";
+		}
+		session.setAttribute("isCommitTest", true);
 		List<Integer> danInt = (List<Integer>) session.getAttribute("danInt");
 		List<Integer> panInt = (List<Integer>) session.getAttribute("panInt");
 		List<Integer> duoInt = (List<Integer>) session.getAttribute("duoInt");

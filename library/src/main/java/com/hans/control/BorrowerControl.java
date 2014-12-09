@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hans.model.Book;
 import com.hans.model.Borrower;
@@ -30,7 +29,9 @@ public class BorrowerControl {
 	@RequestMapping(value = "/login")
 	public String login(String username, String password, HttpSession session) {
 		System.out.println(username);
-		Borrower b = testService.getBorrowerById(username);		
+		Borrower b = testService.getBorrowerById(username);	
+		if(b==null) 
+			return "../error/loginError";
 		if (b.getKeyword().equals(password))
 			return getInfo(username, session);
 		return "../error/loginError";

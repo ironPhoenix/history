@@ -28,6 +28,8 @@
 			value="jdbc:mysql://localhost:3306/question?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="question" />
 		<property name="password" value="12345678" />
+<!-- 		<property name="username" value="root" />
+		<property name="password" value="" /> -->
 	</bean>
 
 	<bean id="sessionFactory"
