@@ -1,5 +1,7 @@
 package com.hans.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,12 @@ public class TestDao {
 
 	public Duo getDuoById(long id) {
 		return (Duo) sessionFactory.getCurrentSession().get(Duo.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getAllUsers() {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from User u");
+		return (List<User>) query.list();
 	}
 }

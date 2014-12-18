@@ -1,18 +1,15 @@
 package com.hans.control;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalTime;
+import java.io.FileOutputStream;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.hans.model.Dan;
-import com.hans.model.Duo;
-import com.hans.model.Pan;
+import com.hans.model.User;
 import com.hans.service.TestService;
 
 public class DbControl {
@@ -32,11 +29,48 @@ public class DbControl {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"a-servlet.xml");
 		TestService ts = context.getBean("testService", TestService.class);
-		addDan(ts);	
-		addPan(ts);
-		//addDuo(ts);
+		printExcel(ts);
 	}
-	private static void addDuo(TestService ts) throws Exception {
+	private static void printExcel(TestService ts) throws Exception{
+		// 第一步，创建一个webbook，对应一个Excel文件  
+        HSSFWorkbook wb = new HSSFWorkbook();  
+        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+        HSSFSheet sheet = wb.createSheet("用户表一");  
+        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+        HSSFRow row = sheet.createRow(0);  
+       
+        row.createCell(0).setCellValue("电话号码");  
+        row.createCell(1).setCellValue("姓名");  
+        row.createCell(2).setCellValue("成绩");  
+        row.createCell(3).setCellValue("工作单位");
+  
+        List<User> list = ts.getAllUsers();
+  
+        for (int i = 0; i < list.size(); i++)  
+        {  
+            row = sheet.createRow(i + 1);  
+            
+            // 第四步，创建单元格，并设置值  
+            row.createCell(0).setCellValue(list.get(i).getPhoneNumber());  
+            row.createCell(1).setCellValue(list.get(i).getUsername());  
+            row.createCell(2).setCellValue(list.get(i).getScore());  
+            row.createCell(3).setCellValue(list.get(i).getWorkSpace());  
+         
+        }  
+        // 第六步，将文件存到指定位置  
+        try  
+        {  
+            FileOutputStream fout = new FileOutputStream("c:/code/users.xls");  
+            wb.write(fout);  
+            fout.close();  
+        }  
+        catch (Exception e)  
+        {  
+            e.printStackTrace();  
+        }
+		
+	}
+/*	private static void addDuo(TestService ts) throws Exception {
 		Path p = Paths.get("C:\\code\\c.txt");
 		List<String> list = Files.readAllLines(p, StandardCharsets.UTF_8);
 		for (int i = 0; list.size() > i; i = i + 6) {
@@ -89,5 +123,7 @@ public class DbControl {
 			ts.addDan(dan);
 		}
 		
-	}
+	}*/
+
+
 }

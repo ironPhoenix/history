@@ -28,6 +28,7 @@ public class TestService {
 	public void addDan(Dan dan) {
 		testDao.addDan(dan);
 	}
+
 	public void saveUser(User user) {
 		testDao.saveUser(user);
 	}
@@ -76,11 +77,15 @@ public class TestService {
 	}
 
 	public void addPan(Pan pan) {
-		testDao.addPan(pan);	
+		testDao.addPan(pan);
 	}
 
 	public void addDuo(Duo duo) {
 		testDao.addDuo(duo);
-		
+
+	}
+
+	public List<User> getAllUsers() {
+		return testDao.getAllUsers();
 	}
 }
